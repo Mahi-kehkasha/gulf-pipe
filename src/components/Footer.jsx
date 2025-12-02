@@ -47,35 +47,33 @@ export default function Footer() {
     { 
       titleKey: 'footer_products', 
       links: [
-        { key: 'nav_pipes', to: '/products/pipes' },
-        { key: 'nav_fittings', to: '/products/fittings' },
-        { key: 'nav_flanges', to: '/products/flanges' },
-        { key: 'nav_accessories', to: '/products/accessories' },
+        { key: 'pipes', to: '/products/pipes' },
+        { key: 'fittings', to: '/products/fittings' },
+        { key: 'flanges', to: '/products/flanges' },
+        { key: 'accessories', to: '/products/accessories' },
       ]
     },
     { 
       titleKey: 'nav_about', 
       links: [
-        { key: 'about_vision', to: '/about#vision' },
-        { key: 'about_history', to: '/about#history' },
-        { key: 'about_corporate_video', to: '/about#video' },
-        { key: 'about_key_stats', to: '/about#stats' },
-        { key: 'about_whats_new', to: '/news' },
-        { key: 'about_blogs', to: '/blog' },
-        { key: 'about_our_family', to: '/about#family' },
-        { key: 'about_projects', to: '/projects' },
+        { key: 'about vision', to: '/about#vision' },
+        { key: 'about history', to: '/about#history' },
+        { key: 'about corporate video', to: '/about#video' },
+        { key: 'about key stats', to: '/about#stats' },
+        { key: 'about whats new', to: '/news' },
+        { key: 'about blogs', to: '/blog' },
+       
+        { key: 'about projects', to: '/projects' },
       ]
     },
     { 
       titleKey: 'footer_support', 
       links: [
-        { key: 'support_services', to: '/support/services' },
-        { key: 'support_industries', to: '/support/industries' },
-        { key: 'support_project_packages', to: '/support/packages' },
-        { key: 'support_project_management', to: '/support/management' },
-        { key: 'support_terms_conditions', to: '/legal/terms' },
-        { key: 'support_careers', to: '/careers' },
-        { key: 'support_sustainability', to: '/sustainability' },
+        { key: 'support services', to: '/support/services' },
+        { key: 'support industries', to: '/support/industries' },
+        { key: 'support project packages', to: '/support/packages' },
+        { key: 'support project management', to: '/support/management' },
+        { key: 'support terms conditions', to: '/legal/terms' },
         { key: 'support_privacy_policy', to: '/legal/privacy' },
       ]
     },
@@ -146,11 +144,7 @@ export default function Footer() {
       <div className="bg-gray-800 border-t border-gray-700">
         <div className={`max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between text-xs text-gray-400 ${isArabic ? 'flex-col-reverse md:flex-row-reverse' : ''}`}>
           
-          {/* Copyright and Metric Disclaimer */}
-          <div className={`order-3 md:order-1 mt-4 md:mt-0 ${isArabic ? 'text-right' : 'text-left'}`}>
-            <p className="mb-1">{t('footer_copyright')}</p>
-            <p className="text-gray-500">{t('metric_disclaimer')}</p>
-          </div>
+
 
           {/* Social Media Links */}
           <div className={`flex space-x-4 order-2 ${isArabic ? 'flex-row-reverse space-x-reverse' : ''}`}>
@@ -162,8 +156,7 @@ export default function Footer() {
 
           {/* Legal and Sitemap Links */}
           <div className={`flex space-x-4 order-1 md:order-3 ${isArabic ? 'flex-row-reverse space-x-reverse' : ''}`}>
-            <Link to="/legal/terms" className="hover:text-orange-500 transition-colors">{t('terms_conditions')}</Link>
-            <Link to="/sitemap" className="hover:text-orange-500 transition-colors">{t('sitemap')}</Link>
+            
           </div>
         </div>
       </div>
