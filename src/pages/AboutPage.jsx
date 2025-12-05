@@ -1,23 +1,23 @@
-import Section from '../components/Section' // Assuming Section handles the max-width and padding
+import { useTranslation } from 'react-i18next'
+import Section from '../components/Section' // Assumed Section handles max-width and padding
+import ceoPortrait from '../assets/hero/Ceo.jpeg'
 
-// Assuming a Section component structure like this for context:
-/*
-function Section({ id, titleKey, children, className = '' }) {
-  const { t } = useTranslation()
-  return (
-    <section id={id} className={`py-12 ${className}`}>
-      <div className="max-w-7xl mx-auto px-4">
-        {titleKey && (
-          <h2 className="text-4xl font-bold text-gray-800 mb-8">{t(titleKey)}</h2>
-        )}
-        {children}
-      </div>
-    </section>
-  )
-}
-*/
+// --- Custom Component for Standardized Headings ---
+// This ensures all section titles look consistent and professional
+const SectionHeader = ({ subTitle, title, color = 'text-orange-600' }) => (
+  <div className="mb-10 text-center">
+    <p className={`text-sm font-semibold uppercase tracking-widest ${color} mb-2`}>
+      {subTitle}
+    </p>
+    <h2 className="text-4xl sm:text-5xl font-extrabold text-gray-900">
+      {title}
+    </h2>
+  </div>
+)
 
 export default function AboutPage() {
+  const { t } = useTranslation()
+
   // --- Data structures (Reorganized for clarity) ---
   const overview = {
     title: "GULF PIPE SUPPLY & SERVICES",
@@ -31,7 +31,6 @@ export default function AboutPage() {
   }
 
   const history = {
-    // This text is derived from the smaller text block in image_b5c4be.jpg
     content: "Established over 30 years ago, Arrow Pipes began as a modest piping supplier with a bold vision to redefine quality and stability in the industry. Through consistent growth, strategic alliances, and an unwavering commitment to excellence, we have evolved into one of the largest stockists and distributors in the MENA region. Today, we operate from a 1 million sq. ft. stocking facility in Dubai’s Jebel Ali Free Zone, maintaining over 40,000 metric tons of ready inventory. With a global client base, we continue to grow and innovate—always guided by our core values of delivering quality materials, on time, every time."
   }
 
@@ -47,95 +46,125 @@ export default function AboutPage() {
   // --- Component JSX ---
   return (
     <>
-      {/* 1. HERO BANNER/INITIAL OVERVIEW (Matches image_b5c7df.jpg layout) */}
-      <div className="bg-gray-50 pt-12">
-        <div className="max-w-7xl mx-auto px-4 pb-12">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+      {/* 1. HERO BANNER/INITIAL OVERVIEW (Enhanced) */}
+      <div className="bg-gray-900 pt-20 pb-16 text-white shadow-xl">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
             
-            {/* Left Column (Main Title) */}
-            <div className="space-y-4">
-              <p className="text-xl font-medium text-orange-600 border-b-2 border-orange-600 w-fit pb-1">
-                Who we are
+            {/* Left Column (Main Title & Intro) */}
+            <div className="space-y-6">
+              <p className="text-lg font-semibold text-orange-400 uppercase tracking-widest">
+                {t('who we are') || 'Who We Are'}
               </p>
-              <h1 className="text-5xl md:text-6xl font-extrabold text-gray-900 leading-tight">
-                About Us – Gulf Pipe Supply & Services
+              <h1 className="text-5xl md:text-7xl font-extrabold leading-tight">
+                {t('about us') || 'About Us'}
               </h1>
-              {/* Optional: Add the main overview text here to match the structure */}
-            </div>
-
-            {/* Right Column (Intro Text) */}
-            <div className="space-y-6 pt-10">
-              <p className="text-lg text-gray-700">
-                {/* Text derived from your existing content, formatted for the large intro block */}
+              <p className="text-xl text-gray-300">
                 GPSS is a well established trading and contracting company located in the industrial city of **Al Jubail, Saudi Arabia**. We are one of the top suppliers offering services to the **Oil, Gas, Petrochemical, Electro mechanical, marine engineering**, and associated industries.
               </p>
-              <p className="text-sm text-gray-500 italic">
-                {history.content} {/* This is the smaller, detailed text from the image */}
-              </p>
-              <button className="bg-gray-900 text-white px-8 py-3 font-semibold uppercase tracking-wider hover:bg-orange-600 transition-colors duration-300">
-                COMPANY PROFILE
+              <button 
+                className="mt-4 bg-orange-600 text-white px-10 py-3 font-bold uppercase tracking-wider rounded-lg shadow-lg hover:bg-orange-700 transition-all duration-300 transform hover:scale-[1.02] focus:outline-none focus:ring-4 focus:ring-orange-500 focus:ring-opacity-50"
+                aria-label={t('download_profile') || 'Download Company Profile'}
+              >
+                {t('company profile') || 'COMPANY PROFILE'}
               </button>
+            </div>
+
+            {/* Right Column (Detailed History Block) */}
+            <div className="space-y-4 pt-4 md:pt-16 bg-gray-800 p-6 rounded-xl shadow-inner border-l-4 border-orange-600">
+                <p className="text-sm font-medium text-orange-500 uppercase">Our Heritage</p>
+                <p className="text-base text-gray-400 leading-relaxed italic">
+                  {history.content}
+                </p>
             </div>
           </div>
         </div>
       </div>
       
-      {/* Visual Separator Banner (Matches image_b5c7df.jpg's hero image) */}
-      <div className="w-full h-80 bg-cover bg-center" 
-           style={{ backgroundImage: 'url(./assets/corporate_silhouette_bg.jpg)' }} 
-           aria-hidden="true"
+      {/* Visual Separator Banner (Using a common industrial placeholder) */}
+      <div className="w-full h-80 bg-gray-600 bg-blend-multiply flex items-center justify-center" 
+            style={{ 
+              backgroundImage: 'url(https://images.unsplash.com/photo-1544773836-e17f223f03b2?fit=crop&w=1600&q=80)',
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+            }} 
+            aria-hidden="true"
       >
-        {/* Placeholder for the dark corporate silhouette image */}
-              </div>
+        <div className='text-center text-white p-8 bg-black/40 rounded-lg'>
+          <p className='text-3xl font-bold uppercase tracking-wider'>
+            Engineering Excellence in the MENA Region
+          </p>
+        </div>
+      </div>
       
       {/* ----------------------------------------------------- */}
       
-      {/* 2. CORE OVERVIEW / WHO WE ARE (From your original component, styled) */}
-      <Section id="core-overview" titleKey="GULF PIPE SUPPLY & SERVICES" className="bg-white">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+      {/* 2. CORE OVERVIEW / WHO WE ARE (Refined Section) */}
+      <Section id="core-overview" className="bg-white py-16">
+        <SectionHeader 
+          subTitle={t('our_promise') || 'Our Promise'}
+          title={t('premier stockist') || 'A Premier Stockist & Distributor'}
+        />
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 items-center">
           
-          {/* Left Column: Detailed Description (Matches image_b5c4be.jpg left column) */}
-          <div className="space-y-6 p-6 border-l-4 border-orange-500">
-            <h2 className="text-3xl font-bold text-gray-900">
-              Arrow Pipes & Fittings is a premier stockist, distributor, and supplier.
-            </h2>
+          {/* Left Column: Detailed Description */}
+          <div className="md:col-span-2 space-y-6 p-6 border-l-4 border-orange-500 bg-gray-50 rounded-lg shadow-md">
+            <h3 className="text-3xl font-bold text-gray-900">
+              {t('arrow pipes') || 'Arrow Pipes & Fittings is a premier stockist, distributor, and supplier.'}
+            </h3>
             <p className="text-gray-700 leading-relaxed">
-              Arrow Pipes & Fittings is a premier stockholder, distributor, and supplier of project materials specializing in Carbon, Stainless, Duplex, and Super Duplex steel piping products. Our operations are built on a foundation of integrity, innovation, and deep technical expertise.
+              {t('arrow pipes detail') || 'Arrow Pipes & Fittings is a premier stockholder, distributor, and supplier of project materials specializing in Carbon, Stainless, Duplex, and Super Duplex steel piping products. Our operations are built on a foundation of integrity, innovation, and deep technical expertise.'}
             </p>
             {overview.paragraphs.map((p, index) => (
-              <p key={index} className="text-sm text-gray-600">
+              <p key={index} className="text-base text-gray-600 flex items-start">
+                <svg className="h-5 w-5 mr-2 mt-1 text-orange-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" /></svg>
                 {p}
               </p>
             ))}
           </div>
           
-          {/* Right Column: Images (Matches image_b5c4be.jpg bottom section) */}
-          <div className="space-y-8">
-            <div className="h-64 bg-gray-200 overflow-hidden rounded-lg shadow-lg">
-                          </div>
-            <div className="h-64 bg-gray-300 overflow-hidden rounded-lg shadow-lg">
-                          </div>
+          {/* Right Column: Images (Placeholder for visual interest) */}
+          <div className="md:col-span-1 space-y-6">
+            <div className="h-48 bg-gray-300 rounded-lg overflow-hidden shadow-xl transform hover:scale-[1.05] transition-transform duration-300">
+               
+            </div>
+            <div className="h-48 bg-gray-400 rounded-lg overflow-hidden shadow-xl transform hover:scale-[1.05] transition-transform duration-300">
+               
+            </div>
           </div>
         </div>
       </Section>
 
-      <hr className="max-w-7xl mx-auto border-gray-200" />
+      <hr className="max-w-7xl mx-auto border-gray-100" />
       
       {/* ----------------------------------------------------- */}
       
-      {/* 3. LEADERSHIP (From your original component) */}
-      <Section id="about-leadership" titleKey="Leadership" className="bg-gray-50">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
-            <div className="md:col-span-1 h-64 bg-gray-300 rounded-lg overflow-hidden shadow-lg">
-                            </div>
-            <div className="md:col-span-2 p-6 bg-white rounded-lg shadow-xl border-l-4 border-blue-600">
-                <p className="text-sm font-semibold text-gray-500 mb-1">Company Leadership</p>
-                <h3 className="text-3xl font-bold text-gray-800 mb-1">{leadership.name}</h3>
-                <p className="text-xl text-orange-600 mb-4 font-semibold">{leadership.title}</p>
-                <p className="text-gray-700 italic border-t pt-4 mt-4">
-                    "{leadership.quote}"
-                </p>
-            </div>
+      {/* 3. LEADERSHIP (Enhanced Card Design) */}
+      <Section id="about-leadership" className="bg-gray-50 py-16">
+        <SectionHeader 
+          subTitle={t('our leader') || 'Our Leader'}
+          title={t('leadership') || 'Meet Our Leadership'}
+          color='text-blue-600'
+        />
+
+        <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 items-center bg-white p-8 rounded-xl shadow-2xl border-t-8 border-blue-600">
+          <div className="md:col-span-1 h-64 w-full bg-gray-300 rounded-lg overflow-hidden shadow-lg mx-auto" aria-label="Portrait of CEO, Mohammed Eid Rashid Al Khater">
+            <img
+              src={ceoPortrait}
+              alt={t('ceo_image_alt') || 'Portrait of Mohammed Eid Rashid Al Khater, CEO'}
+              className="w-full h-full object-cover"
+              loading="lazy"
+            />
+          </div>
+          <div className="md:col-span-2 space-y-4">
+            <p className="text-sm font-semibold text-gray-500 uppercase tracking-widest">{t('company leadership') || 'Company Leadership'}</p>
+            <h3 className="text-3xl font-bold text-gray-800">{leadership.name}</h3>
+            <p className="text-xl text-blue-600 font-bold">{leadership.title}</p>
+            <blockquote className="text-lg text-gray-700 italic border-l-4 border-orange-500 pl-4 py-2 mt-4">
+                "{leadership.quote}"
+            </blockquote>
+          </div>
         </div>
       </Section>
       
@@ -143,28 +172,34 @@ export default function AboutPage() {
 
       {/* ----------------------------------------------------- */}
       
-      {/* 4. VISION & MISSION (Mirrored Layout, as requested) */}
-      <Section id="about-vision-mission" titleKey="Our Vision & Our Mission" className="bg-white">
+      {/* 4. VISION & MISSION (Refined Card Design) */}
+      <Section id="about-vision-mission" className="bg-white py-16">
+        <SectionHeader 
+          subTitle={t('our_future') || 'Our Future'}
+          title={t('Vision & Mission') || 'Vision & Mission'}
+          color='text-orange-600'
+        />
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           
           {/* Vision Block */}
-          <div className="p-8 bg-blue-50 rounded-lg shadow-lg border-t-4 border-blue-600 hover:shadow-xl transition-shadow">
-            <h3 className="text-2xl font-bold mb-3 text-blue-900 flex items-center">
-              <svg className="h-6 w-6 mr-2 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" /></svg>
-              Our Vision
+          <div className="p-10 bg-blue-50 rounded-xl shadow-lg border-t-8 border-blue-600 flex flex-col hover:shadow-2xl transition-all duration-300">
+            <h3 className="text-3xl font-extrabold mb-4 text-blue-900 flex items-center">
+              <svg className="h-8 w-8 mr-3 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" /></svg>
+              {t('our vision') || 'Our Vision'}
             </h3>
-            <p className="text-lg text-gray-700 leading-relaxed italic border-l-4 border-blue-300 pl-4">
+            <p className="text-xl text-gray-700 leading-relaxed italic border-l-4 border-blue-300 pl-4 py-2 flex-grow">
               "{vision}"
             </p>
           </div>
 
           {/* Mission Block */}
-          <div className="p-8 bg-orange-50 rounded-lg shadow-lg border-t-4 border-orange-600 hover:shadow-xl transition-shadow">
-            <h3 className="text-2xl font-bold mb-3 text-orange-900 flex items-center">
-              <svg className="h-6 w-6 mr-2 text-orange-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.24a3 3 0 00-4.24-4.24L12 11.5l-4.378-4.378a3 3 0 00-4.24 4.24L10 16.5l-2.378 2.378a3 3 0 004.24 4.24L12 19.5l4.378 4.378a3 3 0 004.24-4.24L14 16.5z"/></svg>
-              Our Mission
+          <div className="p-10 bg-orange-50 rounded-xl shadow-lg border-t-8 border-orange-600 flex flex-col hover:shadow-2xl transition-all duration-300">
+            <h3 className="text-3xl font-extrabold mb-4 text-orange-900 flex items-center">
+              <svg className="h-8 w-8 mr-3 text-orange-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.24a3 3 0 00-4.24-4.24L12 11.5l-4.378-4.378a3 3 0 00-4.24 4.24L10 16.5l-2.378 2.378a3 3 0 004.24 4.24L12 19.5l4.378 4.378a3 3 0 004.24-4.24L14 16.5z"/></svg>
+              {t('our mission') || 'Our Mission'}
             </h3>
-            <p className="text-lg text-gray-700 leading-relaxed italic border-l-4 border-orange-300 pl-4">
+            <p className="text-xl text-gray-700 leading-relaxed italic border-l-4 border-orange-300 pl-4 py-2 flex-grow">
               "{mission}"
             </p>
           </div>

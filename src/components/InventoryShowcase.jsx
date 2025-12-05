@@ -8,66 +8,106 @@ export default function InventoryShowcase({ detailed = false }) {
   const { t } = useTranslation()
 
   return (
-    <Section id="inventory" titleKey={t('section_inventory')}>
-      <div className="w-full">
-        <div className="mb-10 animate-fade-in-up">
-          <p className="text-xs font-semibold tracking-wide uppercase text-gray-500">
-            Products
-          </p>
-          <h2 className="mt-2 text-3xl md:text-4xl font-extrabold tracking-tight text-slate-900">
-            Complete Piping Solutions
-          </h2>
-          <p className="mt-4 text-sm md:text-base text-gray-700 max-w-3xl">
-            {t('inventory_p1')} {t('inventory_p2')}
-          </p>
+    <Section id="inventory" titleKey={t('section_inventory')} hideTitle>
+      <div className="w-full flex flex-col gap-12">
+        {/* Top text layout (left big heading, right description) */}
+        <div className="grid md:grid-cols-[minmax(0,1.6fr)_minmax(0,1.4fr)] gap-10 lg:gap-16 items-start">
+          <div>
+            <p className="text-xs font-semibold tracking-[0.25em] uppercase text-gray-500">
+              {t('inventory_label') || 'What we offer'}
+            </p>
+            <h2 className="mt-4 text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight text-slate-900 leading-tight">
+              {t('inventory_heading') || 'Engineering solutions for\nall industries.'}
+            </h2>
+          </div>
+          <div className="space-y-4 text-sm md:text-base text-gray-600 leading-relaxed max-w-xl">
+            <p>
+              {t('inventory_p1')}
+            </p>
+            <p>
+              {t('inventory_p2')}
+            </p>
+          </div>
         </div>
 
-        <div className="grid gap-8 md:grid-cols-3">
-          <article className="bg-white rounded-lg shadow-md overflow-hidden border border-gray-100 transition-transform duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-blue-500/40 animate-fade-in-up">
-            <div className="h-52 overflow-hidden">
-              <img src={pipesImg} alt="Industrial pipe stock" className="h-full w-full object-cover" />
+        {/* Bottom icon row (4 simple service items) */}
+        <div className="grid gap-10 md:gap-8 md:grid-cols-2 lg:grid-cols-4">
+          {/* Pipes */}
+          <article className="group flex flex-col items-start md:items-center lg:items-start gap-3">
+            <div className="h-14 w-14 flex items-center justify-center">
+              <img src={pipesImg} alt="Pipes icon" className="h-12 w-12 object-contain" />
             </div>
-            <div className="p-5">
-              <h3 className="text-lg font-semibold text-slate-900">Pipes</h3>
-              {detailed ? (
-                <>
-                  <p className="mt-2 text-sm text-gray-700">{t('ss_pipes_grade')}</p>
-                  <p className="mt-1 text-sm text-gray-600">{t('ss_pipes_list')}</p>
-                  <p className="mt-3 text-sm text-gray-700">{t('cs_pipes_grade')}</p>
-                  <p className="mt-1 text-sm text-gray-600">{t('cs_pipes_list')}</p>
-                </>
-              ) : (
-                <p className="mt-2 text-sm text-gray-600">
-                  {t('ss_pipes_grade')} {t('ss_pipes_list')}
-                </p>
-              )}
-            </div>
+            <h3 className="text-base md:text-lg font-semibold text-slate-900">
+              {t('inventory_pipes_title') || 'Metal manufacturing'}
+            </h3>
+            <p className="text-xs text-gray-500">
+              {t('inventory_pipes_sub') || 'Carbon & stainless steel piping for fabrication shops.'}
+            </p>
+            <button
+              type="button"
+              className="mt-1 inline-flex items-center text-sm font-semibold text-slate-900 group-hover:text-orange-500 transition-colors"
+            >
+              <span className="mr-1">→</span>
+            </button>
           </article>
 
-          <article className="bg-white rounded-lg shadow-md overflow-hidden border border-gray-100 transition-transform duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-blue-500/40 animate-fade-in-up">
-            <div className="h-52 overflow-hidden">
-              <img src={fittingsImg} alt="Pipe fittings" className="h-full w-full object-cover" />
+          {/* Fittings */}
+          <article className="group flex flex-col items-start md:items-center lg:items-start gap-3">
+            <div className="h-14 w-14 flex items-center justify-center">
+              <img src={fittingsImg} alt="Fittings icon" className="h-12 w-12 object-contain" />
             </div>
-            <div className="p-5">
-              <h3 className="text-lg font-semibold text-slate-900">Fittings</h3>
-              <p className="mt-2 text-sm text-gray-600">
-                High-quality butt-weld and forged fittings in Carbon Steel, Stainless Steel, and
-                Duplex grades to support complex piping layouts and critical industrial services.
-              </p>
-            </div>
+            <h3 className="text-base md:text-lg font-semibold text-slate-900">
+              {t('inventory_fittings_title') || 'Oil refinery plants'}
+            </h3>
+            <p className="text-xs text-gray-500">
+              {t('inventory_fittings_sub') || 'High‑integrity fittings for refinery and process units.'}
+            </p>
+            <button
+              type="button"
+              className="mt-1 inline-flex items-center text-sm font-semibold text-slate-900 group-hover:text-orange-500 transition-colors"
+            >
+              <span className="mr-1">→</span>
+            </button>
           </article>
 
-          <article className="bg-white rounded-lg shadow-md overflow-hidden border border-gray-100 transition-transform duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-blue-500/40 animate-fade-in-up">
-            <div className="h-52 overflow-hidden">
-              <img src={flangesImg} alt="Flanges and valves" className="h-full w-full object-cover" />
+          {/* Flanges & Valves */}
+          <article className="group flex flex-col items-start md:items-center lg:items-start gap-3">
+            <div className="h-14 w-14 flex items-center justify-center">
+              <img src={flangesImg} alt="Flanges icon" className="h-12 w-12 object-contain" />
             </div>
-            <div className="p-5">
-              <h3 className="text-lg font-semibold text-slate-900">Flanges &amp; Valves</h3>
-              <p className="mt-2 text-sm text-gray-600">
-                Comprehensive range of flanges, valves, and accessories engineered for reliability,
-                leak integrity, and long-term performance across demanding applications.
-              </p>
+            <h3 className="text-base md:text-lg font-semibold text-slate-900">
+              {t('inventory_flanges_title') || 'Power generation'}
+            </h3>
+            <p className="text-xs text-gray-500">
+              {t('inventory_flanges_sub') || 'Flanges and valves supporting power and utility systems.'}
+            </p>
+            <button
+              type="button"
+              className="mt-1 inline-flex items-center text-sm font-semibold text-slate-900 group-hover:text-orange-500 transition-colors"
+            >
+              <span className="mr-1">→</span>
+            </button>
+          </article>
+
+          {/* Structural & Specials */}
+          <article className="group flex flex-col items-start md:items-center lg:items-start gap-3">
+            <div className="h-14 w-14 flex items-center justify-center">
+              <span className="h-12 w-12 flex items-center justify-center rounded-full border border-dashed border-gray-300 text-xl font-bold text-orange-500">
+                +
+              </span>
             </div>
+            <h3 className="text-base md:text-lg font-semibold text-slate-900">
+              {t('inventory_structural_title') || 'Construction works'}
+            </h3>
+            <p className="text-xs text-gray-500">
+              {t('inventory_structural_sub') || 'Structural steel and specials for pipe racks and construction.'}
+            </p>
+            <button
+              type="button"
+              className="mt-1 inline-flex items-center text-sm font-semibold text-slate-900 group-hover:text-orange-500 transition-colors"
+            >
+              <span className="mr-1">→</span>
+            </button>
           </article>
         </div>
       </div>
